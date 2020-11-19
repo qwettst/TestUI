@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+test{
+    options {
+        systemProperties(System.getProperties())
+    }
+}
+
+task Console(type: Test) {
+    systemProperty 'login', System.getProperty('login')
+    systemProperty 'pass', System.getProperty('pass')
+    systemProperty 'receiverEmail', System.getProperty('receiverEmail')
+    systemProperty 'titleLetter', System.getProperty('titleLetter')
+    systemProperty 'fromStr', System.getProperty('fromStr')
+    useJUnitPlatform() {
+    }
+}
+
+dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    implementation 'org.testng:testng:6.14.3'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+// https://mvnrepository.com/artifact/com.codeborne/selenide
+    compile group: 'com.codeborne', name: 'selenide', version: '5.15.1'
+// https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+}
